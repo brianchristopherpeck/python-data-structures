@@ -5,24 +5,15 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
-answer = 0
-
 class Solution:
-    def max_depth_td(self, root, depth):
-        global answer
+    def max_depth_td(self, root):
         if not root:
-            return
-
-        if not root.right and not root.left:
-            answer =  max(answer, depth)
-
-        if root.left:
-            Solution().max_depth_td(root.left, depth + 1)
+            return 0
+        else:
+            left_depth = self.max_depth_td(root.left)
+            right_depth = self.max_depth_td(root.right)
+            return max(left_depth, right_depth) + 1
         
-        if root.right:
-            Solution().max_depth_td(root.right, depth + 1)
-        
-        return answer
         
 
 # Tree Node
@@ -48,7 +39,7 @@ root.right.right = TreeNode(17)
 root.right.right.left = TreeNode(14)
 root.right.right.left.right = TreeNode(2)
 
-result = Solution().max_depth_td(root, 1)
+result = Solution().max_depth_td(root)
 print(result)
 
 # Should be 5
